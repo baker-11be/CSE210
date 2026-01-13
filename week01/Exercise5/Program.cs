@@ -1,20 +1,21 @@
+// Exercise5: functions demo 
 using System;
 
 class Program
 {
     static void Main(string[] args)
     {
-        DisplayWelcomeMessage();
+        DisplayWelcome();
 
-        string userName = PromptUserName();
-        int userNumber = PromptUserNumber();
+        string name = PromptUserName();
+        int number = PromptUserNumber();
 
-        int squaredNumber = SquareNumber(userNumber);
+        int squared = SquareNumber(number);
 
-        DisplayResult(userName, squaredNumber);
+        DisplayResult(name, squared);
     }
 
-    static void DisplayWelcomeMessage()
+    static void DisplayWelcome()
     {
         Console.WriteLine("Welcome to the program!");
     }
@@ -23,7 +24,6 @@ class Program
     {
         Console.Write("Please enter your name: ");
         string name = Console.ReadLine();
-
         return name;
     }
 
@@ -31,14 +31,13 @@ class Program
     {
         Console.Write("Please enter your favorite number: ");
         int number = int.Parse(Console.ReadLine());
-
         return number;
     }
 
+    // Returns the square of the provided integer
     static int SquareNumber(int number)
     {
-        int square = number * number;
-        return square;
+        return number * number;
     }
 
     static void DisplayResult(string name, int square)
