@@ -5,23 +5,23 @@ using System.Text.Json;
 
 public class Journal
 {
-    private List<Entry> entries = new List<Entry>();
+    private List<Entry> _entries = new List<Entry>();
 
     public void AddEntry(Entry e)
     {
-        if (e != null) entries.Add(e);
+        if (e != null) _entries.Add(e);
     }
 
     public void DisplayEntries()
     {
         Console.WriteLine("--- Journal Entries ---");
-        if (entries.Count == 0)
+        if (_entries.Count == 0)
         {
             Console.WriteLine("(no entries)");
             return;
         }
 
-        foreach (var e in entries)
+        foreach (var e in _entries)
         {
             Console.WriteLine(e);
             Console.WriteLine();
@@ -36,14 +36,14 @@ public class Journal
         if (filename.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
-            string json = JsonSerializer.Serialize(entries, options);
+            string json = JsonSerializer.Serialize(_entries, options);
             File.WriteAllText(filename, json);
             return;
         }
 
         using (StreamWriter writer = new StreamWriter(filename))
         {
-            foreach (var e in entries)
+            foreach (var e in _entries)
             {
                 writer.WriteLine(e.ToFileString());
             }
@@ -63,7 +63,7 @@ public class Journal
                 var loaded = JsonSerializer.Deserialize<List<Entry>>(json);
                 if (loaded != null)
                 {
-                    entries = loaded;
+                    _entries = loaded;
                 }
             }
             catch
@@ -89,6 +89,6 @@ public class Journal
         }
 
         // Replace current entries with loaded ones
-        entries = newEntries;
+        _entries = newEntries;
     }
 }
