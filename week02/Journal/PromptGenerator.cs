@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 public class PromptGenerator
 {
-    private List<string> prompts;
-    private Random rng = new Random();
+    private readonly List<string> _prompts;
+    private readonly Random _rng = new Random();
 
     public PromptGenerator()
     {
-        prompts = new List<string>()
+        _prompts = new List<string>()
         {
             "Who was the most interesting person I interacted with today?",
             "What was the best part of my day?",
@@ -23,14 +23,14 @@ public class PromptGenerator
 
     public string GetRandomPrompt()
     {
-        if (prompts.Count == 0) return "What's one thing you remember about today?";
-        int idx = rng.Next(prompts.Count);
-        return prompts[idx];
+        if (_prompts.Count == 0) return "What's one thing you remember about today?";
+        int idx = _rng.Next(_prompts.Count);
+        return _prompts[idx];
     }
 
     // Allow adding custom prompts if desired
     public void AddPrompt(string p)
     {
-        if (!string.IsNullOrWhiteSpace(p)) prompts.Add(p);
+        if (!string.IsNullOrWhiteSpace(p)) _prompts.Add(p);
     }
 }

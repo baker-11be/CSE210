@@ -1,6 +1,6 @@
 // Journal program
 // Features: write entries from random prompts, display, save/load to file.
-// Enhancement: supports JSON (.json) save/load and sanitizes newlines on save to keep one entry per line for text files.
+// Enhancement (exceeds core): supports JSON (.json) save/load and sanitizes newlines when writing text so each entry stays on one line.
 using System;
 class Program
 {
@@ -12,14 +12,13 @@ class Program
         bool keepGoing = true;
         while (keepGoing)
         {
-            Console.WriteLine();
-            Console.WriteLine("Journal Menu");
-            Console.WriteLine("1. Write a new entry");
-            Console.WriteLine("2. Display the journal");
-            Console.WriteLine("3. Save the journal to a file");
-            Console.WriteLine("4. Load the journal from a file");
+            Console.WriteLine("Please select one of the following choices:");
+            Console.WriteLine("1. Write");
+            Console.WriteLine("2. Display");
+            Console.WriteLine("3. Load");
+            Console.WriteLine("4. Save");
             Console.WriteLine("5. Quit");
-            Console.Write("Choose an option (1-5): ");
+            Console.Write("What would you like to do? ");
             string choice = Console.ReadLine();
 
             switch (choice)
@@ -31,10 +30,10 @@ class Program
                     journal.DisplayEntries();
                     break;
                 case "3":
-                    SaveJournal(journal);
+                    LoadJournal(journal);
                     break;
                 case "4":
-                    LoadJournal(journal);
+                    SaveJournal(journal);
                     break;
                 case "5":
                     keepGoing = false;
@@ -51,9 +50,8 @@ class Program
     static void WriteEntry(Journal journal, PromptGenerator prompts)
     {
         string prompt = prompts.GetRandomPrompt();
-        Console.WriteLine();
-        Console.WriteLine("Prompt: " + prompt);
-        Console.Write("Your response: ");
+        Console.WriteLine(prompt);
+        Console.Write("> ");
         string response = Console.ReadLine();
 
         string date = DateTime.Now.ToShortDateString();
