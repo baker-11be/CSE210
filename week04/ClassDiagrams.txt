@@ -1,0 +1,81 @@
+W04 TEAM ACTIVITY: FOUNDATION PROGRAMS - CLASS DIAGRAMS
+========================================================
+Student: Baker Mfitundinda
+Date: January 28, 2026
+
+
+PROGRAM 1: YOUTUBE VIDEOS
+========================================================
+
+┌─────────────────────────────────────┐
+│            Video                     │
+├─────────────────────────────────────┤
+│ - _title: string                     │
+│ - _author: string                    │
+│ - _length: int                       │
+│ - _comments: List<Comment>           │
+├─────────────────────────────────────┤
+│ + Video(title, author, length)       │
+│ + AddComment(comment: Comment): void │
+│ + GetNumberOfComments(): int         │
+│ + DisplayVideoInfo(): void           │
+└─────────────────────────────────────┘
+                 │
+                 │ has many
+                 ▼
+┌─────────────────────────────────────┐
+│           Comment                    │
+├─────────────────────────────────────┤
+│ - _commenterName: string             │
+│ - _commentText: string               │
+├─────────────────────────────────────┤
+│ + Comment(commenterName, commentText)│
+│ + GetCommenterName(): string         │
+│ + GetCommentText(): string           │
+└─────────────────────────────────────┘
+
+
+PROGRAM 2: ONLINE ORDERING
+========================================================
+
+┌─────────────────────────────────────┐
+│            Order                     │
+├─────────────────────────────────────┤
+│ - _products: List<Product>           │
+│ - _customer: Customer                │
+├─────────────────────────────────────┤
+│ + Order(customer: Customer)          │
+│ + AddProduct(product: Product): void │
+│ + GetTotalCost(): double             │
+│ + GetPackingLabel(): string          │
+│ + GetShippingLabel(): string         │
+└─────────────────────────────────────┘
+         │                  │
+         │ has many         │ has one
+         ▼                  ▼
+┌──────────────────┐  ┌─────────────────────────────────┐
+│    Product       │  │          Customer                │
+├──────────────────┤  ├─────────────────────────────────┤
+│ - _name: string  │  │ - _name: string                  │
+│ - _productId:    │  │ - _address: Address              │
+│     string       │  ├─────────────────────────────────┤
+│ - _quantity: int │  │ + GetName(): string              │
+├──────────────────┤  │ + GetAddress(): Address          │
+│ + Product(name,  │  │ + LivesInUSA(): bool             │
+│     productId,   │  └─────────────────────────────────┘
+│     price,       │                   │
+│     quantity)    │                   │ has one
+│ + GetName():     │                   ▼
+│     string       │         ┌─────────────────────────────┐
+│ + GetProductId():│         │         Address              │
+│     string       │         ├─────────────────────────────┤
+│ + GetTotalCost():│         │ - _street: string            │
+│     double       │         │ - _city: string              │
+└──────────────────┘         │ - _stateProvince: string     │
+                             │ - _country: string           │
+                             ├─────────────────────────────┤
+                             │ + Address(street, city,      │
+                             │     stateProvince, country)  │
+                             │ + IsInUSA(): bool            │
+                             │ + GetFullAddress(): string   │
+                             └─────────────────────────────┘
